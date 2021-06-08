@@ -7,6 +7,7 @@ Project to Scrapping data from Match in Euroleague
 ### How I made 📋
 
     · SpringBoot 2.0
+    · Swagger
 
 ### How to use it 📋
 
