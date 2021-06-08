@@ -8,6 +8,8 @@ Project to Scrapping data from Match in Euroleague
 
     · SpringBoot 2.0
     · Swagger
+    · JSOUP
+    · URL
 
 ### How to use it 📋
 
