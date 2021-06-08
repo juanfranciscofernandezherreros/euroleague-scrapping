@@ -25,10 +25,10 @@ public class TeamsController {
 
     private final TeamsService teamsService;
 
-    @GetMapping(value = UrlMapping.PUBLIC + UrlMapping.V1 +UrlMapping.SYNC + UrlMapping.TEAMS + "/{year}")
-    public Page<TeamsDTO> syncAllTeamsByYear(@PathVariable String year,
-                                             final @PageableDefault(size = 40) Pageable pageable) throws IOException {
-        log.info("[TeamsController][syncAllTeamsByYear] year={}",year);
+    @GetMapping(value = UrlMapping.PUBLIC + UrlMapping.V1 + UrlMapping.TEAMS + UrlMapping.YEAR + "/{year}")
+    public Page<TeamsDTO> findTeamsByYear(final @PathVariable String year,
+                                          final @PageableDefault(size = 40) Pageable pageable) throws IOException {
+        log.info("[TeamsController][findTeamsByYear] year={}",year);
         return teamsService.syncAllTeamsByYear(year,pageable);
     }
 

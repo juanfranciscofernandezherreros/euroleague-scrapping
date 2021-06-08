@@ -1,4 +1,4 @@
-# Scrapping Eeuroleague Data
+# Scrapping Euroleague Data
 
 ## Starting 🚀
 
@@ -6,7 +6,11 @@ Project to Scrapping data from Match in Euroleague
 
 ### How to use it 📋
 
-I try to explain how to use it.
+I try to explain how to use the endpoints more complex .. we could use swagger for the rest of endpoints
+
+```bash
+http://localhost:8485/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
+```
 
 #### Obtain all years 
 
@@ -43,7 +47,7 @@ curl -X GET "http://localhost:8485/api/public/v1/years" -H  "accept: application
 #### Obtain all teams of year selected
 
 ```bash
-curl -X GET "http://localhost:8485/api/public/v1/sync/teams/2000" -H  "accept: application/json"
+curl -X GET "http://localhost:8485/api/public/v1/teams/year/2000" -H  "accept: application/json"
 ```
 
 ```bash
@@ -92,7 +96,95 @@ curl -X GET "http://localhost:8485/api/public/v1/sync/teams/2000" -H  "accept: a
 #### Obtains all match of team filtered by year and teamcode
 
 ```bash
-curl -X GET "http://localhost:8485/api/public/v1/sync/games/clubcode/MAD/seassoncode/2020" -H  "accept: application/json"
+curl -X GET "curl -X GET http://localhost:8485/api/public/v1/games/teams/showteam?clubcode=MAD&seasoncode=2020" -H  "accept: application/json"
+```
+
+```bash
+{
+  "content": [
+    {
+      "id": null,
+      "numberMatch": "15",
+      "winLose": "W",
+      "versus": "at Olympiacos Piraeus",
+      "teamPhaseGameScore": "82 - 86",
+      "matchLink": "https://www.euroleague.net/main/results/showgame?gamecode=132&seasoncode=E2020",
+      "header": {
+        "Live": false,
+        "Round": "15",
+        "Date": "18/12/2020",
+        "Hour": "20:00 ",
+        "Stadium": "PEACE AND FRIENDSHIP STADIUM",
+        "Capacity": "0",
+        "TeamA": "OLYMPIACOS PIRAEUS",
+        "TeamB": "REAL MADRID",
+        "CodeTeamA": "OLY",
+        "TVCodeA": "OLY",
+        "CodeTeamB": "MAD",
+        "TVCodeB": "RMB",
+        "imA": "OLY       ",
+        "imB": "MAD       ",
+        "ScoreA": "82",
+        "ScoreB": "86",
+        "CoachA": "BARTZOKAS, GEORGIOS",
+        "CoachB": "LASO, PABLO",
+        "GameTime": "45:00",
+        "wid": "90",
+        "Quarter": "",
+        "FoultsA": "22",
+        "FoultsB": "19",
+        "TimeoutsA": "5",
+        "TimeoutsB": "3",
+        "ScoreQuarter1A": 12,
+        "ScoreQuarter2A": 30,
+        "ScoreQuarter3A": 51,
+        "ScoreQuarter4A": 69,
+        "ScoreExtraTimeA": 82,
+        "ScoreQuarter1B": 12,
+        "ScoreQuarter2B": 31,
+        "ScoreQuarter3B": 49,
+        "ScoreQuarter4B": 69,
+        "ScoreExtraTimeB": 86,
+        "Phase": "REGULAR SEASON",
+        "PhaseReducedName": "R S ",
+        "Competition": "EUROLEAGUE 2020-21",
+        "CompetitionReducedName": "E2020     ",
+        "pcom": "E2020     ",
+        "Referee1": "RYZHYK, BORYS",
+        "Referee2": "ZAMOJSKI, JAKUB",
+        "Referee3": "HORDOV, TOMISLAV"
+      },
+      "gameCode": "132",
+      "seassonCode": "2020",
+      "team": "MAD"
+    }
+  ],
+  "pageable": {
+    "sort": {
+      "sorted": false,
+      "unsorted": true,
+      "empty": true
+    },
+    "offset": 0,
+    "pageSize": 40,
+    "pageNumber": 0,
+    "paged": true,
+    "unpaged": false
+  },
+  "last": true,
+  "totalPages": 1,
+  "totalElements": 39,
+  "size": 40,
+  "number": 0,
+  "sort": {
+    "sorted": false,
+    "unsorted": true,
+    "empty": true
+  },
+  "numberOfElements": 39,
+  "first": true,
+  "empty": false
+}
 ```
 
 #### Obtain data from a specific match

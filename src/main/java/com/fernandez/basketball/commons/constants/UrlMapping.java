@@ -30,8 +30,8 @@ public final class UrlMapping {
     public static final String FAVOURITE = "/favourite";
     public static final String CLUBCODE = "/clubcode";
     public static final String SEASSONCODE = "/seassoncode";
-
     public static final String TEAMS = "/teams";
+    public static final String SHOWTEAM = "/showteam";
 
 
 }
