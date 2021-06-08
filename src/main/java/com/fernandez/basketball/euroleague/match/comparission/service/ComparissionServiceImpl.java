@@ -3,7 +3,6 @@ package com.fernandez.basketball.euroleague.match.comparission.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fernandez.basketball.commons.constants.UrlMapping;
 import com.fernandez.basketball.euroleague.match.comparission.dto.Comparission;
-import com.fernandez.basketball.euroleague.match.header.dto.Header;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

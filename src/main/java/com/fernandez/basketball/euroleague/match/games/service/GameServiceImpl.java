@@ -1,13 +1,9 @@
 package com.fernandez.basketball.euroleague.match.games.service;
 
-import com.fernandez.basketball.euroleague.match.common.repository.MatchRepository;
 import com.fernandez.basketball.euroleague.match.games.dto.GamesDTO;
 import com.fernandez.basketball.euroleague.match.games.dto.GamesScrappingDTO;
-import com.fernandez.basketball.euroleague.match.games.repository.GamesRepository;
 import com.fernandez.basketball.euroleague.match.header.dto.Header;
 import com.fernandez.basketball.euroleague.match.header.service.HeaderService;
-import com.fernandez.basketball.euroleague.match.playbyplay.adapter.MatchAdapter;
-import com.fernandez.basketball.euroleague.match.playbyplay.dto.MatchDTO;
 import com.fernandez.basketball.euroleague.match.playbyplay.entity.jpa.Match;
 import com.fernandez.basketball.utils.DocumenUtils;
 import lombok.RequiredArgsConstructor;
@@ -25,35 +21,21 @@ import org.springframework.stereotype.Service;
 import javax.validation.constraints.NotNull;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class GameServiceImpl implements GameService{
 
-    private final MatchRepository matchRepository;
 
     private final HeaderService headerService;
 
     private final ModelMapper modelMapper = new ModelMapper();
 
-    private final GamesRepository gamesRepository;
 
     private final MongoTemplate mongoTemplate;
-
-    @Override
-    public MatchDTO save(MatchDTO matchDTO) {
-        Match match = MatchAdapter.mapToEntity(matchDTO);
-        return modelMapper.map(matchRepository.save(match),MatchDTO.class);
-    }
-
-    @Override
-    public Page<GamesScrappingDTO> findAllGamesTeamAndYear(String seassonCode,String clubcode,Pageable pageable){
-        Header header = new Header();
-        header.setCodeTeamA(clubcode);
-        return gamesRepository.findAllBySeassonCodeAndTeam(seassonCode,clubcode,pageable);
-    }
 
     @Override
     public Page<GamesScrappingDTO> findAllGamesByTeamAndYear(String clubcode, String seasoncode,Pageable pageable) throws MalformedURLException, UnsupportedEncodingException {
@@ -102,18 +84,12 @@ public class GameServiceImpl implements GameService{
                 Header header = headerService.findInfoMatch(gameCode,seasoncode).getBody();
                 gamesScrappingDTO.setHeader(header);
                 gamesScrappingDTO.setTeam(clubcode);
-                mongoTemplate.save(gamesScrappingDTO);
                 gamesScrappingDTOList.add(gamesScrappingDTO);
             }
         }else{
             log.error("El Status Code no es OK es: "+DocumenUtils.getStatusConnectionCode(url));
         }
         return convertList2Page(gamesScrappingDTOList,pageable);
-    }
-
-    @Override
-    public Page<GamesDTO> findAllGames (final Pageable pageable ) {
-        return matchRepository.findAll(pageable).map(this::mapFromEntityToDto);
     }
 
     private GamesDTO mapFromEntityToDto (final Match match ) {

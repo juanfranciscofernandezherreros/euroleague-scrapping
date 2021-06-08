@@ -1,7 +1,6 @@
 package com.fernandez.basketball.euroleague.teams.service;
 
 import com.fernandez.basketball.euroleague.teams.dto.TeamsDTO;
-import com.fernandez.basketball.euroleague.teams.repository.TeamsRepository;
 import com.fernandez.basketball.utils.DocumenUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +10,6 @@ import org.jsoup.select.Elements;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,15 +19,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class TeamsServiceImpl implements TeamsService{
-
-    private final MongoTemplate mongoTemplate;
-
-    private final TeamsRepository teamsRepository;
-
-    @Override
-    public Page<TeamsDTO> findAllTeamsByYear(final String year,final Pageable pageable) {
-        return teamsRepository.findAllTeamsBySeasson(year,pageable);
-    }
 
     @Override
     public Page<TeamsDTO> syncAllTeamsByYear(String year, Pageable pageable) {
@@ -53,7 +42,6 @@ public class TeamsServiceImpl implements TeamsService{
                     teamsDTO.setUrl(newUrl);
                     teamsDTO.setNameTeam(link.text());
                     teamsDTO.setSeasson(part2);
-                    mongoTemplate.save(teamsDTO);
                     teamsDTOList.add(teamsDTO);
                 }
             }

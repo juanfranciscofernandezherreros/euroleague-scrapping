@@ -1,0 +1,60 @@
+{
+   "Live":false,
+   "TeamA":"FC Barcelona",
+   "TeamB":"Zenit St Petersburg",
+   "CodeTeamA":"BAR       ",
+   "CodeTeamB":"DYR       ",
+   "ActualQuarter":5,
+   "FirstQuarter":[
+      {
+         "TYPE":0,
+         "NUMBEROFPLAY":2,
+         "CODETEAM":"          ",
+         "PLAYER_ID":"          ",
+         "PLAYTYPE":"BP",
+         "PLAYER":null,
+         "TEAM":null,
+         "DORSAL":null,
+         "MINUTE":1,
+         "MARKERTIME":"",
+         "POINTS_A":null,
+         "POINTS_B":null,
+         "COMMENT":"",
+         "PLAYINFO":"Begin Period"
+      }
+   ],
+   "SecondQuarter":[
+      {
+         "TYPE":0,
+         "NUMBEROFPLAY":144,
+         "CODETEAM":"          ",
+         "PLAYER_ID":"          ",
+         "PLAYTYPE":"BP",
+         "PLAYER":null,
+         "TEAM":null,
+         "DORSAL":null,
+         "MINUTE":11,
+         "MARKERTIME":"",
+         "POINTS_A":null,
+         "POINTS_B":null,
+         "COMMENT":"",
+         "PLAYINFO":"Begin Period"
+      },
+      {
+         "TYPE":0,
+         "NUMBEROFPLAY":138,
+         "CODETEAM":"BAR       ",
+         "PLAYER_ID":"P008985   ",
+         "PLAYTYPE":"OUT",
+         "PLAYER":"BOLMARO, LEANDRO",
+         "TEAM":"FC Barcelona",
+         "DORSAL":"9",
+         "MINUTE":11,
+         "MARKERTIME":"10:00",
+         "POINTS_A":null,
+         "POINTS_B":null,
+         "COMMENT":"",
+         "PLAYINFO":"Out"
+      }
+   ]
+}

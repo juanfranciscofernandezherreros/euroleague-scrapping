@@ -2,7 +2,6 @@ package com.fernandez.basketball.euroleague.match.points.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fernandez.basketball.commons.constants.UrlMapping;
-import com.fernandez.basketball.euroleague.match.playersmatch.dto.PlayerMatch;
 import com.fernandez.basketball.euroleague.match.points.dto.Points;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

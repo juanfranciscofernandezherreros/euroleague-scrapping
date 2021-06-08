@@ -2,7 +2,6 @@ package com.fernandez.basketball.euroleague.match.playersmatch.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fernandez.basketball.commons.constants.UrlMapping;
-import com.fernandez.basketball.euroleague.match.comparission.dto.Comparission;
 import com.fernandez.basketball.euroleague.match.playersmatch.dto.PlayerMatch;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 
 @Slf4j
 @Service

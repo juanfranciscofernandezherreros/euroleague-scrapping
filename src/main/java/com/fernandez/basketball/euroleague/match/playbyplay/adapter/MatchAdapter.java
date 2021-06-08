@@ -1,6 +1,6 @@
 package com.fernandez.basketball.euroleague.match.playbyplay.adapter;
 
-import com.fernandez.basketball.euroleague.match.playbyplay.dto.*;
+import com.fernandez.basketball.euroleague.match.playbyplay.dto.MatchDTO;
 import com.fernandez.basketball.euroleague.match.playbyplay.entity.jpa.Match;
 
 public class MatchAdapter {

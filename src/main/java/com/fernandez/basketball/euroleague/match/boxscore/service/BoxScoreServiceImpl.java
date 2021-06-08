@@ -3,10 +3,8 @@ package com.fernandez.basketball.euroleague.match.boxscore.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fernandez.basketball.commons.constants.UrlMapping;
 import com.fernandez.basketball.euroleague.match.boxscore.dto.BoxScore;
-import com.fernandez.basketball.euroleague.match.playbyplay.dto.MatchDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -20,6 +18,7 @@ import java.net.URL;
 @Service
 @RequiredArgsConstructor
 public class BoxScoreServiceImpl implements BoxScoreService{
+
     @Override
     public BoxScore findBoxScoreFromJson(String fileName) throws IOException {
         final ObjectMapper objectMapper = new ObjectMapper();

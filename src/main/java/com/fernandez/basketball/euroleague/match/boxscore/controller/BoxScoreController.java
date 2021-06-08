@@ -3,7 +3,6 @@ package com.fernandez.basketball.euroleague.match.boxscore.controller;
 import com.fernandez.basketball.commons.constants.UrlMapping;
 import com.fernandez.basketball.euroleague.match.boxscore.dto.BoxScore;
 import com.fernandez.basketball.euroleague.match.boxscore.service.BoxScoreService;
-import com.fernandez.basketball.euroleague.match.comparission.dto.Comparission;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

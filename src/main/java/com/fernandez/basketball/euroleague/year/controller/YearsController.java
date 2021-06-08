@@ -1,13 +1,10 @@
 package com.fernandez.basketball.euroleague.year.controller;
 
 import com.fernandez.basketball.commons.constants.UrlMapping;
-import com.fernandez.basketball.euroleague.match.playbyplay.dto.MatchDTO;
-import com.fernandez.basketball.euroleague.match.playbyplay.service.PlayByPlayService;
 import com.fernandez.basketball.euroleague.year.service.YearService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

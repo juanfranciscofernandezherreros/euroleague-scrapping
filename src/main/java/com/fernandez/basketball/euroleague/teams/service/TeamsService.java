@@ -6,6 +6,5 @@ import org.springframework.data.domain.Pageable;
 
 
 public interface TeamsService {
-    Page<TeamsDTO> findAllTeamsByYear(String seasson, Pageable pageable);
     Page<TeamsDTO> syncAllTeamsByYear(String year, Pageable pageable);
 }
