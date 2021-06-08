@@ -9,10 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -30,12 +27,11 @@ public class GamesController {
     private final PlayByPlayService playByPlayService;
 
 
-    @GetMapping(value = UrlMapping.PUBLIC + UrlMapping.V1 +UrlMapping.SYNC + UrlMapping.GAMES + UrlMapping.CLUBCODE + "/{clubcode}" + UrlMapping.SEASSONCODE + "/{seasoncode}")
-    public Page<GamesScrappingDTO> syncAllGamesByTeamAndYear(@PathVariable String clubcode ,
-                                                             @PathVariable String seasoncode ,
-                                                             final @PageableDefault(size = 40) Pageable pageable) throws MalformedURLException, UnsupportedEncodingException {
-        log.info("[GamesController][syncAllGamesByTeamAndYear] clubcode={} seasoncode={}" , clubcode , seasoncode);
-
+    @GetMapping(value = UrlMapping.PUBLIC + UrlMapping.V1 + UrlMapping.GAMES + UrlMapping.TEAMS + UrlMapping.SHOWTEAM)
+    public Page<GamesScrappingDTO> retreiveAllGamesByTeamAndYear(@RequestParam("clubcode") String clubcode ,
+                                                                @RequestParam("seasoncode") String seasoncode ,
+                                                                final @PageableDefault(size = 40) Pageable pageable) throws MalformedURLException, UnsupportedEncodingException {
+        log.info("[GamesController][retreiveAllGamesByTeamAndYear] clubcode={} seasoncode={}" , clubcode , seasoncode);
         return gameService.findAllGamesByTeamAndYear(clubcode,seasoncode,pageable);
     }
 

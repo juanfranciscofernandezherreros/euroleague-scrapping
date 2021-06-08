@@ -1,10 +1,8 @@
 package com.fernandez.basketball.euroleague.match.games.service;
 
-import com.fernandez.basketball.euroleague.match.games.dto.GamesDTO;
 import com.fernandez.basketball.euroleague.match.games.dto.GamesScrappingDTO;
 import com.fernandez.basketball.euroleague.match.header.dto.Header;
 import com.fernandez.basketball.euroleague.match.header.service.HeaderService;
-import com.fernandez.basketball.euroleague.match.playbyplay.entity.jpa.Match;
 import com.fernandez.basketball.utils.DocumenUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -90,10 +88,6 @@ public class GameServiceImpl implements GameService{
             log.error("El Status Code no es OK es: "+DocumenUtils.getStatusConnectionCode(url));
         }
         return convertList2Page(gamesScrappingDTOList,pageable);
-    }
-
-    private GamesDTO mapFromEntityToDto (final Match match ) {
-        return modelMapper.map(match, GamesDTO.class);
     }
 
     private Page convertList2Page(final List list, final Pageable pageable) {
