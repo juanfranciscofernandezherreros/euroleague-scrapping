@@ -4,13 +4,11 @@
 
 Project to Scrapping data from Match in Euroleague
 
+### How I made 📋
+
+    · SpringBoot 2.0
+
 ### How to use it 📋
-
-I try to explain how to use the endpoints more complex .. we could use swagger for the rest of endpoints
-
-```bash
-http://localhost:8485/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/
-```
 
 #### Obtain all years 
 
@@ -193,9 +191,24 @@ curl -X GET "curl -X GET http://localhost:8485/api/public/v1/games/teams/showtea
 curl -X GET "http://localhost:8485/api/public/v1/data?gamecode=324&seasoncode=2020" -H  "accept: application/json"
 ```
 
-#### Upload files
+If the data endpoint fails because it is a ancient match that doesn't have all information we could use the following endpoints to obtain data.
+
+The majority of controllers has two endpoints but first we need to obtain specific data.
+
+To obtain data like (boxscore,comparission,evolution,header,playbyplay,playersmatch,points,shootingchart) we need to use the following endpoints.
+
+```bash
+curl -X GET "http://localhost:8485/api/public/v1/evolution?gameCode=132&seassonCode=2020" -H  "accept: application/json"
+```
+
+When we have the data saved we could upload the json file.
 
 ```bash
 curl -X POST "http://localhost:8485/file/upload/EVOLUTION" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"file\":\"string\"}"
 ```
 
+And then we could see the file uploaded.
+
+```bash
+curl -X GET "http://localhost:8485/api/public/v1/evolution/132_2020" -H  "accept: application/json"
+```
