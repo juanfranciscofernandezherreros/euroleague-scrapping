@@ -1,9 +1,7 @@
 package com.fernandez.basketball.euroleague.match.playbyplay.controller;
 
 import com.fernandez.basketball.commons.constants.UrlMapping;
-import com.fernandez.basketball.euroleague.match.header.dto.Header;
 import com.fernandez.basketball.euroleague.match.header.service.HeaderService;
-import com.fernandez.basketball.euroleague.match.playbyplay.dto.MarkAsFavouriteDTO;
 import com.fernandez.basketball.euroleague.match.playbyplay.dto.MatchDTO;
 import com.fernandez.basketball.euroleague.match.playbyplay.service.PlayByPlayService;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +21,22 @@ public class PlayByPlayController {
 
     private final PlayByPlayService playByPlayService;
 
-    private final HeaderService headerService;
-
     @GetMapping(value = UrlMapping.PUBLIC + UrlMapping.V1 + UrlMapping.PLAYBYPLAY)
-    public ResponseEntity<MatchDTO> findPlayByPlay(@RequestParam("gamecode") String gamecode , @RequestParam("seassoncode") String seasoncode) throws IOException {
-        log.info("[PlayByPlayController][findPlayByPlay] gamecode={} seasoncode={}" + gamecode , seasoncode);
+    public ResponseEntity<MatchDTO> findPlayByPlay(@RequestParam("gamecode") String gamecode ,
+                                                   @RequestParam("seasoncode") String seasoncode) throws IOException {
+        log.info("[PlayByPlayController][findPlayByPlay]");
         return playByPlayService.downloadWitouthSync(gamecode,seasoncode);
+    }
+
+    @GetMapping(value = UrlMapping.PUBLIC + UrlMapping.V1 + UrlMapping.PLAYBYPLAY + UrlMapping.PLAYER)
+    public ResponseEntity<MatchDTO> retreiveDataSpecificPlayerFromMatch(
+                                                   @RequestParam("gamecode") String gamecode ,
+                                                   @RequestParam("seasoncode") String seasoncode,
+                                                   @RequestParam("playtype") String playtype ,
+                                                   @RequestParam("codeteam") String codeteam,
+                                                   @RequestParam("playerid") String playerid) throws IOException {
+    log.info("[PlayByPlayController][findPlayByPlay] gamecode={} seasoncode={} playtype={} codeteam={} playerid={}", gamecode,seasoncode,playtype,codeteam,playerid);
+    return playByPlayService.retreiveDataSpecificPlayerFromMatch(gamecode, seasoncode, playtype,codeteam,playerid);
     }
 
     @GetMapping(value = UrlMapping.PUBLIC + UrlMapping.V1 + UrlMapping.PLAYBYPLAY + "/{fileName}")
