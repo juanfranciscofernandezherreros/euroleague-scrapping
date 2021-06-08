@@ -6,4 +6,12 @@ Project to Scrapping data from Match in Euroleague
 
 ### How to use it 📋
 
-For use the project we could use swagger-ui : {urlHost}/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#
+I have a Postman Collection under folder resources test/postman that we could check all endpoints.
+
+I try to explain how to use it.
+
+1 Obtain all years
+
+
+
+
