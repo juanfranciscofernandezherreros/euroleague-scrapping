@@ -9,13 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
-
 import javax.validation.constraints.NotNull;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -29,11 +26,6 @@ public class GameServiceImpl implements GameService{
 
 
     private final HeaderService headerService;
-
-    private final ModelMapper modelMapper = new ModelMapper();
-
-
-    private final MongoTemplate mongoTemplate;
 
     @Override
     public Page<GamesScrappingDTO> findAllGamesByTeamAndYear(String clubcode, String seasoncode,Pageable pageable) throws MalformedURLException, UnsupportedEncodingException {

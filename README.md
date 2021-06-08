@@ -13,6 +13,8 @@ Project to Scrapping data from Match in Euroleague
 
 ### How to use it 📋
 
+sW
+
 #### Obtain all years 
 
 ```bash
