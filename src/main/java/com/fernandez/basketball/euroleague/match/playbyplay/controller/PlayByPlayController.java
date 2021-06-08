@@ -25,6 +25,12 @@ public class PlayByPlayController {
 
     private final HeaderService headerService;
 
+    @GetMapping(value = UrlMapping.PUBLIC + UrlMapping.V1 + UrlMapping.PLAYBYPLAY)
+    public ResponseEntity<MatchDTO> findPlayByPlay(@RequestParam("gamecode") String gamecode , @RequestParam("seassoncode") String seasoncode) throws IOException {
+        log.info("[PlayByPlayController][findPlayByPlay] gamecode={} seasoncode={}" + gamecode , seasoncode);
+        return playByPlayService.downloadWitouthSync(gamecode,seasoncode);
+    }
+
     @GetMapping(value = UrlMapping.PUBLIC + UrlMapping.V1 + UrlMapping.PLAYBYPLAY + "/{fileName}")
     public MatchDTO findAll(@PathVariable String fileName) throws IOException {
         log.info("[PlayByPlayController][findAll] fileName={}" , fileName);

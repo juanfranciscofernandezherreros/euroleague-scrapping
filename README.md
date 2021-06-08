@@ -13,7 +13,10 @@ Project to Scrapping data from Match in Euroleague
 
 ### How to use it 📋
 
-sW
+Swagger : 
+```bash
+
+```
 
 #### Obtain all years 
 
