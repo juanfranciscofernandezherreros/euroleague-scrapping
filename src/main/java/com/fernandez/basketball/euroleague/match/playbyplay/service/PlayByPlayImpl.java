@@ -133,6 +133,28 @@ public class PlayByPlayImpl implements PlayByPlayService{
                     .filter(extraTimeDTO -> StringUtils.trim(extraTimeDTO.getCodeteam()).equals(codeteam))
                     .collect(Collectors.toList());
         }
+        if(Objects.nonNull(playerid)  && Objects.nonNull(codeteam) && Objects.isNull(playtype)) {
+            firstQuarterDTOList = matchDTO.getFirstQuarter()
+                    .stream()
+                    .filter(firstQuarterDTO -> StringUtils.trim(firstQuarterDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(firstQuarterDTO.getPlayerId()).equals(playerid))
+                    .collect(Collectors.toList());
+            secondQuarterDTOList = matchDTO.getSecondQuarter()
+                    .stream()
+                    .filter(secondQuarterDTO -> StringUtils.trim(secondQuarterDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(secondQuarterDTO.getPlayerId()).equals(playerid))
+                    .collect(Collectors.toList());
+            thirdQuarterDTOList = matchDTO.getThirdQuarter()
+                    .stream()
+                    .filter(thirdQuarterDTO -> StringUtils.trim(thirdQuarterDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(thirdQuarterDTO.getPlayerId()).equals(playerid))
+                    .collect(Collectors.toList());
+            forthQuarterDTOList = matchDTO.getForthQuarter()
+                    .stream()
+                    .filter(forthQuarterDTO -> StringUtils.trim(forthQuarterDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(forthQuarterDTO.getPlayerId()).equals(playerid))
+                    .collect(Collectors.toList());
+            extraQuarterDTOList = matchDTO.getExtraTime()
+                    .stream()
+                    .filter(extraTimeDTO -> StringUtils.trim(extraTimeDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(extraTimeDTO.getPlayerId()).equals(playerid))
+                    .collect(Collectors.toList());
+        }
         if(Objects.nonNull(playtype) || Objects.nonNull(codeteam) || Objects.nonNull(playerid)){
             matchDTO.setFirstQuarter(firstQuarterDTOList);
             matchDTO.setSecondQuarter(secondQuarterDTOList);
