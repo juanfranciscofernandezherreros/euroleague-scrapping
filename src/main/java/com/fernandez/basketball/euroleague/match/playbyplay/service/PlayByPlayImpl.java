@@ -15,7 +15,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -32,32 +35,111 @@ public class PlayByPlayImpl implements PlayByPlayService{
 
     @Override
     public ResponseEntity<MatchDTO> retreiveDataSpecificPlayerFromMatch(String gamecode, String seasoncode, String playtype, String codeteam, String playerid) throws IOException {
+
+        List<FirstQuarterDTO> firstQuarterDTOList = new ArrayList<FirstQuarterDTO>();
+        List<SecondQuarterDTO> secondQuarterDTOList = new ArrayList<SecondQuarterDTO>();
+        List<ThirdQuarterDTO> thirdQuarterDTOList = new ArrayList<ThirdQuarterDTO>();
+        List<ForthQuarterDTO> forthQuarterDTOList = new ArrayList<ForthQuarterDTO>();
+        List<ExtraTimeDTO> extraQuarterDTOList = new ArrayList<ExtraTimeDTO>();
+
         MatchDTO matchDTO = downloadWitouthSync(gamecode,seasoncode).getBody();
-        List<FirstQuarterDTO> firstQuarterDTOList = matchDTO.getFirstQuarter()
-                .stream()
-                .filter(firstQuarterDTO -> firstQuarterDTO.getPlaytype().equals(playtype) && StringUtils.trim(firstQuarterDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(firstQuarterDTO.getPlayerId()).equals(playerid))
-                .collect(Collectors.toList());
-        List<SecondQuarterDTO> secondQuarterDTOList = matchDTO.getSecondQuarter()
-                .stream()
-                .filter(secondQuarterDTO -> secondQuarterDTO.getPlaytype().equals(playtype) && StringUtils.trim(secondQuarterDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(secondQuarterDTO.getPlayerId()).equals(playerid))
-                .collect(Collectors.toList());
-        List<ThirdQuarterDTO> thirdQuarterDTOList = matchDTO.getThirdQuarter()
-                .stream()
-                .filter(thirdQuarterDTO -> thirdQuarterDTO.getPlaytype().equals(playtype) &&  StringUtils.trim(thirdQuarterDTO.getCodeteam()).equals(codeteam)  && StringUtils.trim(thirdQuarterDTO.getPlayerId()).equals(playerid))
-                .collect(Collectors.toList());
-        List<ForthQuarterDTO> forthQuarterDTOList = matchDTO.getForthQuarter()
-                .stream()
-                .filter(forthQuarterDTO -> forthQuarterDTO.getPlaytype().equals(playtype) && StringUtils.trim(forthQuarterDTO.getCodeteam()).equals(codeteam)  && StringUtils.trim(forthQuarterDTO.getPlayerId()).equals(playerid))
-                .collect(Collectors.toList());
-        List<ExtraTimeDTO> extraTimeDTOSList = matchDTO.getExtraTime()
-                .stream()
-                .filter(extraTimeDTO -> extraTimeDTO.getPlaytype().equals(playtype) && extraTimeDTO.getCodeteam().equals(codeteam)  && StringUtils.trim(extraTimeDTO.getPlayerId()).equals(playerid))
-                .collect(Collectors.toList());
-        matchDTO.setSecondQuarter(secondQuarterDTOList);
-        matchDTO.setFirstQuarter(firstQuarterDTOList);
-        matchDTO.setThirdQuarter(thirdQuarterDTOList);
-        matchDTO.setForthQuarter(forthQuarterDTOList);
-        matchDTO.setExtraTime(extraTimeDTOSList);
+
+        if(Objects.nonNull(playtype) && Objects.isNull(codeteam) && Objects.isNull(playerid)) {
+            firstQuarterDTOList =matchDTO.getFirstQuarter()
+                    .stream()
+                    .filter(firstQuarterDTO -> firstQuarterDTO.getPlaytype().equals(playtype))
+                    .collect(Collectors.toList());
+            secondQuarterDTOList = matchDTO.getSecondQuarter()
+                    .stream()
+                    .filter(secondQuarterDTO -> secondQuarterDTO.getPlaytype().equals(playtype))
+                    .collect(Collectors.toList());
+            thirdQuarterDTOList = matchDTO.getThirdQuarter()
+                    .stream()
+                    .filter(thirdQuarterDTO -> thirdQuarterDTO.getPlaytype().equals(playtype))
+                    .collect(Collectors.toList());
+            forthQuarterDTOList = matchDTO.getForthQuarter()
+                    .stream()
+                    .filter(forthQuarterDTO -> forthQuarterDTO.getPlaytype().equals(playtype))
+                    .collect(Collectors.toList());
+            extraQuarterDTOList = matchDTO.getExtraTime()
+                    .stream()
+                    .filter(extraTimeDTO -> extraTimeDTO.getPlaytype().equals(playtype))
+                    .collect(Collectors.toList());
+        }
+
+        if(Objects.nonNull(playtype) && Objects.nonNull(codeteam) && Objects.nonNull(playerid)) {
+            firstQuarterDTOList =matchDTO.getFirstQuarter()
+                    .stream()
+                    .filter(firstQuarterDTO -> firstQuarterDTO.getPlaytype().equals(playtype) && StringUtils.trim(firstQuarterDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(firstQuarterDTO.getPlayerId()).equals(playerid))
+                    .collect(Collectors.toList());
+            secondQuarterDTOList = matchDTO.getSecondQuarter()
+                    .stream()
+                    .filter(secondQuarterDTO -> secondQuarterDTO.getPlaytype().equals(playtype) && StringUtils.trim(secondQuarterDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(secondQuarterDTO.getPlayerId()).equals(playerid))
+                    .collect(Collectors.toList());
+            thirdQuarterDTOList = matchDTO.getThirdQuarter()
+                    .stream()
+                    .filter(thirdQuarterDTO -> thirdQuarterDTO.getPlaytype().equals(playtype) && StringUtils.trim(thirdQuarterDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(thirdQuarterDTO.getPlayerId()).equals(playerid))
+                    .collect(Collectors.toList());
+            forthQuarterDTOList = matchDTO.getForthQuarter()
+                    .stream()
+                    .filter(forthQuarterDTO -> forthQuarterDTO.getPlaytype().equals(playtype) && StringUtils.trim(forthQuarterDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(forthQuarterDTO.getPlayerId()).equals(playerid))
+                    .collect(Collectors.toList());
+            extraQuarterDTOList = matchDTO.getExtraTime()
+                    .stream()
+                    .filter(extraTimeDTO -> extraTimeDTO.getPlaytype().equals(playtype) && StringUtils.trim(extraTimeDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(extraTimeDTO.getPlayerId()).equals(playerid))
+                    .collect(Collectors.toList());
+        }
+        if(Objects.nonNull(playtype)  && Objects.nonNull(codeteam) && Objects.isNull(playerid)) {
+            firstQuarterDTOList = matchDTO.getFirstQuarter()
+                    .stream()
+                    .filter(firstQuarterDTO -> StringUtils.trim(firstQuarterDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(firstQuarterDTO.getPlaytype()).equals(playtype))
+                    .collect(Collectors.toList());
+            secondQuarterDTOList = matchDTO.getSecondQuarter()
+                    .stream()
+                    .filter(secondQuarterDTO -> StringUtils.trim(secondQuarterDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(secondQuarterDTO.getPlaytype()).equals(playtype))
+                    .collect(Collectors.toList());
+            thirdQuarterDTOList = matchDTO.getThirdQuarter()
+                    .stream()
+                    .filter(thirdQuarterDTO -> StringUtils.trim(thirdQuarterDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(thirdQuarterDTO.getPlaytype()).equals(playtype))
+                    .collect(Collectors.toList());
+            forthQuarterDTOList = matchDTO.getForthQuarter()
+                    .stream()
+                    .filter(forthQuarterDTO -> StringUtils.trim(forthQuarterDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(forthQuarterDTO.getPlaytype()).equals(playtype))
+                    .collect(Collectors.toList());
+            extraQuarterDTOList = matchDTO.getExtraTime()
+                    .stream()
+                    .filter(extraTimeDTO -> StringUtils.trim(extraTimeDTO.getCodeteam()).equals(codeteam) && StringUtils.trim(extraTimeDTO.getPlaytype()).equals(playtype))
+                    .collect(Collectors.toList());
+        }
+        if(Objects.isNull(playtype)  && Objects.nonNull(codeteam) && Objects.isNull(playerid)) {
+            firstQuarterDTOList = matchDTO.getFirstQuarter()
+                    .stream()
+                    .filter(firstQuarterDTO -> StringUtils.trim(firstQuarterDTO.getCodeteam()).equals(codeteam))
+                    .collect(Collectors.toList());
+            secondQuarterDTOList = matchDTO.getSecondQuarter()
+                    .stream()
+                    .filter(secondQuarterDTO -> StringUtils.trim(secondQuarterDTO.getCodeteam()).equals(codeteam))
+                    .collect(Collectors.toList());
+            thirdQuarterDTOList = matchDTO.getThirdQuarter()
+                    .stream()
+                    .filter(thirdQuarterDTO -> StringUtils.trim(thirdQuarterDTO.getCodeteam()).equals(codeteam))
+                    .collect(Collectors.toList());
+            forthQuarterDTOList = matchDTO.getForthQuarter()
+                    .stream()
+                    .filter(forthQuarterDTO -> StringUtils.trim(forthQuarterDTO.getCodeteam()).equals(codeteam))
+                    .collect(Collectors.toList());
+            extraQuarterDTOList = matchDTO.getExtraTime()
+                    .stream()
+                    .filter(extraTimeDTO -> StringUtils.trim(extraTimeDTO.getCodeteam()).equals(codeteam))
+                    .collect(Collectors.toList());
+        }
+        if(Objects.nonNull(playtype) || Objects.nonNull(codeteam) || Objects.nonNull(playerid)){
+            matchDTO.setFirstQuarter(firstQuarterDTOList);
+            matchDTO.setSecondQuarter(secondQuarterDTOList);
+            matchDTO.setThirdQuarter(thirdQuarterDTOList);
+            matchDTO.setForthQuarter(forthQuarterDTOList);
+            matchDTO.setExtraTime(extraQuarterDTOList);
+        }
         return ResponseEntity.ok(matchDTO);
     }
 

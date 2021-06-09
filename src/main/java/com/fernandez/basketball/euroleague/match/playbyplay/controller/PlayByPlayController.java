@@ -32,9 +32,9 @@ public class PlayByPlayController {
     public ResponseEntity<MatchDTO> retreiveDataSpecificPlayerFromMatch(
                                                    @RequestParam("gamecode") String gamecode ,
                                                    @RequestParam("seasoncode") String seasoncode,
-                                                   @RequestParam("playtype") String playtype ,
-                                                   @RequestParam("codeteam") String codeteam,
-                                                   @RequestParam("playerid") String playerid) throws IOException {
+                                                   @RequestParam(name = "playtype", required = false) String playtype ,
+                                                   @RequestParam(name = "codeteam", required = false) String codeteam,
+                                                   @RequestParam(name = "playerid", required = false) String playerid) throws IOException {
     log.info("[PlayByPlayController][findPlayByPlay] gamecode={} seasoncode={} playtype={} codeteam={} playerid={}", gamecode,seasoncode,playtype,codeteam,playerid);
     return playByPlayService.retreiveDataSpecificPlayerFromMatch(gamecode, seasoncode, playtype,codeteam,playerid);
     }
